@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>新建用户</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body data-page="user-create">
+    <main class="shell">
+      <section class="hero">
+        <div>
+          <p class="tag">用户模块</p>
+          <h1>新建用户</h1>
+          <p>提交有效数据后，会在用户列表中新增一条记录。</p>
+        </div>
+        <div class="toolbar">
+          <a class="button-link" href="/users">返回列表</a>
+        </div>
+      </section>
+
+      <section class="panel">
+        <form class="grid two-col" data-form="create-user">
+          <label>
+            姓名
+            <input data-testid="user.name" placeholder="Jamie Operator" />
+          </label>
+          <label>
+            邮箱
+            <input data-testid="user.email" placeholder="jamie@example.com" />
+          </label>
+          <label>
+            角色
+            <select data-testid="user.role">
+              <option value="">请选择角色</option>
+              <option value="admin">admin</option>
+              <option value="viewer">viewer</option>
+            </select>
+          </label>
+          <div></div>
+          <button type="submit" data-testid="submit">提交</button>
+        </form>
+        <p class="helper">留空任意字段会触发表单校验失败场景。</p>
+        <div class="message" data-testid="form-message"></div>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>

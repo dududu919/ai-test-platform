@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>用户列表</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body data-page="users">
+    <main class="shell">
+      <section class="hero">
+        <div>
+          <p class="tag" data-testid="current-role">当前角色：admin</p>
+          <h1>用户列表</h1>
+          <p>本地自动化演示使用的简单列表页。</p>
+        </div>
+        <div class="toolbar">
+          <a class="button-link" href="/users/new" data-testid="create">新建用户</a>
+          <button type="button" data-testid="logout">退出登录</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="message" data-testid="users-message"></div>
+        <table>
+          <thead>
+            <tr>
+              <th>姓名</th>
+              <th>邮箱</th>
+              <th>角色</th>
+            </tr>
+          </thead>
+          <tbody data-testid="user-rows"></tbody>
+        </table>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>

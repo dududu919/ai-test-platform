@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>登录</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body data-page="login">
+    <main class="shell">
+      <section class="hero">
+        <div>
+          <p class="tag">演示系统</p>
+          <h1>用户管理后台</h1>
+          <p>用于本地 AI 测试平台演示的最小网站。</p>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h1>登录</h1>
+        <p>输入任意用户名和密码即可登录。用户名填 <code>viewer</code> 时模拟低权限账号。</p>
+        <form class="grid" data-form="login">
+          <label>
+            用户名
+            <input name="username" data-testid="login.username" placeholder="admin" />
+          </label>
+          <label>
+            密码
+            <input
+              type="password"
+              name="password"
+              data-testid="login.password"
+              placeholder="password"
+            />
+          </label>
+          <button type="submit" data-testid="submit">登录</button>
+          <div class="message" data-testid="login-message"></div>
+        </form>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>

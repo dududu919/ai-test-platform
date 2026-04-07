@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI 测试平台控制台</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">本地控制台</p>
+          <h1>AI 测试平台</h1>
+          <p class="lede">
+            这是一个本地演示控制台，可以触发测试、查看状态、打开被测网站和查看最新报告。
+          </p>
+        </div>
+        <div class="actions">
+          <a class="ghost" href="http://127.0.0.1:3000/login" target="_blank" rel="noreferrer">
+            打开演示网站
+          </a>
+          <a class="ghost" href="/report/latest" target="_blank" rel="noreferrer">
+            打开最新报告
+          </a>
+          <button id="run-button" type="button">运行测试流程</button>
+        </div>
+      </section>
+
+      <section class="summary-grid">
+        <article class="summary-card">
+          <span class="label">演示网站</span>
+          <strong id="demo-status">检查中...</strong>
+        </article>
+        <article class="summary-card">
+          <span class="label">测试流程</span>
+          <strong id="pipeline-status">空闲</strong>
+        </article>
+        <article class="summary-card">
+          <span class="label">报告</span>
+          <strong id="report-status">检查中...</strong>
+        </article>
+        <article class="summary-card">
+          <span class="label">场景数</span>
+          <strong id="scenario-count">0</strong>
+        </article>
+      </section>
+
+      <section class="grid">
+        <article class="panel">
+          <div class="panel-header">
+            <h2>运行日志</h2>
+            <button id="refresh-button" class="mini" type="button">刷新</button>
+          </div>
+          <pre id="run-log">还没有触发新的运行。</pre>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <h2>最新报告</h2>
+            <a class="mini-link" href="/report/latest" target="_blank" rel="noreferrer">打开完整页面</a>
+          </div>
+          <iframe id="report-frame" title="latest report" src="/report/latest"></iframe>
+        </article>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>

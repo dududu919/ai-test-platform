@@ -1,0 +1,24 @@
+baseUrl: http://127.0.0.1:3000
+loginPage: /login
+modules:
+  - users
+roles:
+  - admin
+  - viewer
+criticalFlows:
+  - login
+  - create-user
+readonlyTables:
+  - audit_logs
+forbiddenActions:
+  - delete-production-like-data
+selectors:
+  login.username: input[name="username"]
+  login.password: input[name="password"]
+  login.submit: '[data-testid="submit"]'
+db:
+  client: postgres
+  connectionString: postgresql://user:password@localhost:5432/app
+llm:
+  provider: mock
+  model: scenario-draft
