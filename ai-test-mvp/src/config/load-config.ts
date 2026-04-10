@@ -14,7 +14,7 @@ const configSchema = z.object({
   selectors: z.record(z.string()).default({}),
   db: z
     .object({
-      client: z.enum(["postgres", "mysql"]),
+      client: z.enum(["postgres", "mysql", "sqlite"]),
       connectionString: z.string().min(1)
     })
     .optional(),

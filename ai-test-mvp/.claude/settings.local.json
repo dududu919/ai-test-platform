@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/Administrator/Documents/New-project/**)",
+      "Bash(npx tsx:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm install:*)",
+      "Bash(node db-init.js)",
+      "Bash(node server.js)",
+      "Bash(npm run:*)",
+      "Bash(node -e \"const s1=require\\('./scenarios.json'\\); const s2=require\\('./whitebox-scenarios.json'\\); const fs=require\\('fs'\\); fs.writeFileSync\\('scenarios.json', JSON.stringify\\([...s1, ...s2], null, 2\\)\\);\")",
+      "Bash(node -e \"const fs=require\\('fs'\\); const s1=JSON.parse\\(fs.readFileSync\\('scenarios.json','utf8'\\)\\); const s2=JSON.parse\\(fs.readFileSync\\('whitebox-scenarios.json','utf8'\\)\\); fs.writeFileSync\\('scenarios.json', JSON.stringify\\([...s1, ...s2], null, 2\\)\\);\")",
+      "Bash(node -e \"const s=require\\('./scenarios.json'\\); console.log\\('Total scenarios:', s.length\\); console.log\\('Whitebox scenarios:', s.filter\\(x=>x.id.startsWith\\('whitebox'\\)\\).length\\);\")",
+      "Bash(node -e \"const s=require\\('./scenarios_pool/scenarios.json'\\); s.filter\\(x=>x.id.startsWith\\('whitebox'\\)\\).forEach\\(x=>console.log\\(x.id + ': ' + x.module\\)\\);\")",
+      "Bash(node -e \"const s=require\\('./scenarios_pool/scenarios.json'\\); const wb=s.filter\\(x=>x.id.startsWith\\('whitebox'\\)\\); console.log\\('共有', wb.length, '个白盒测试用例:\\\\n'\\); wb.forEach\\(\\(x,i\\)=>console.log\\(\\(i+1\\) + '. ' + x.id + '\\\\n   模块: ' + x.module + '\\\\n   优先级: ' + x.priority + '\\\\n'\\)\\);\")",
+      "Bash(node -e \"const s=JSON.parse\\(require\\('fs'\\).readFileSync\\('scenarios_pool/scenarios.json','utf8'\\)\\); const wb=s.slice\\(97,100\\); wb.forEach\\(x=>console.log\\('ID:', x.id, '\\\\n模块:', x.module, '\\\\n优先级:', x.priority, '\\\\nSetup步骤:', x.setup?.length || 0, '\\\\nAPI调用:', x.steps.filter\\(s=>s.action==='api.request'\\).length, '\\\\n数据库断言:', x.assertions.filter\\(a=>a.type==='db'\\).length, '\\\\n---'\\)\\);\")",
+      "Bash(node -e \"const s=JSON.parse\\(require\\('fs'\\).readFileSync\\('scenarios_pool/scenarios.json','utf8'\\)\\); console.log\\('Total scenarios:', s.length\\); console.log\\('First 3 IDs:', s.slice\\(0,3\\).map\\(x=>x.id\\)\\); console.log\\('Last 3 IDs:', s.slice\\(-3\\).map\\(x=>x.id\\)\\);\")",
+      "Bash(node -e \"const fs=require\\('fs'\\); const s1=JSON.parse\\(fs.readFileSync\\('scenarios.json','utf8'\\)\\); const s2=JSON.parse\\(fs.readFileSync\\('whitebox-scenarios.json','utf8'\\)\\); console.log\\('Original:', s1.length, 'Whitebox:', s2.length\\); const merged=[...s1, ...s2]; console.log\\('Merged:', merged.length\\); fs.writeFileSync\\('scenarios.json', JSON.stringify\\(merged, null, 2\\)\\); console.log\\('Saved to scenarios.json'\\);\")",
+      "Bash(node -e \"const r=JSON.parse\\(require\\('fs'\\).readFileSync\\('reports/latest-report.json','utf8'\\)\\); console.log\\('测试总结:'\\); console.log\\('- 总计:', r.summary.total\\); console.log\\('- 通过:', r.summary.passed, '✅'\\); console.log\\('- 失败:', r.summary.failed, '❌'\\); console.log\\('\\\\n白盒测试结果:'\\); const wb=r.scenarioReports.filter\\(x=>x.scenario.id.startsWith\\('whitebox'\\)\\); console.log\\('- 白盒用例总数:', wb.length\\); console.log\\('- 白盒通过:', wb.filter\\(x=>x.classification==='passed'\\).length\\); console.log\\('- 白盒失败:', wb.filter\\(x=>x.classification!=='passed'\\).length\\);\")",
+      "Bash(pkill -f \"tsx src/main.ts pipeline\")",
+      "Bash(node -e \"const r=JSON.parse\\(require\\('fs'\\).readFileSync\\('reports/latest-report.json','utf8'\\)\\); console.log\\('测试总结:'\\); console.log\\('总计:', r.summary.total\\); console.log\\('通过:', r.summary.passed, '✅'\\); console.log\\('失败:', r.summary.failed, '❌'\\); const wb=r.scenarioReports.filter\\(x=>x.scenario.id.startsWith\\('whitebox'\\)\\); console.log\\('\\\\n白盒测试:'\\); console.log\\('总数:', wb.length\\); console.log\\('通过:', wb.filter\\(x=>x.classification==='passed'\\).length\\); console.log\\('失败:', wb.filter\\(x=>x.classification!=='passed'\\).length\\);\")"
+    ]
+  }
+}

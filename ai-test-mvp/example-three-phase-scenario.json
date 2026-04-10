@@ -1,0 +1,76 @@
+[
+  {
+    "id": "user-create-with-db-setup",
+    "module": "user-management",
+    "priority": "high",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "users"
+      },
+      {
+        "action": "db.insert",
+        "table": "users",
+        "data": {
+          "id": 999,
+          "username": "existing_user",
+          "role": "viewer"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/login",
+        "value": "http://localhost:3000/login"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "admin"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      },
+      {
+        "action": "api.request",
+        "target": "/api/users",
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "username": "new_user",
+          "role": "admin"
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/users",
+        "expect": {
+          "status": "201"
+        }
+      },
+      {
+        "type": "db",
+        "table": "users",
+        "where": {
+          "username": "new_user"
+        },
+        "expect": {
+          "role": "admin"
+        }
+      }
+    ],
+    "risk": "medium"
+  }
+]

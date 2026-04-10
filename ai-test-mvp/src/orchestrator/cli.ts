@@ -1,4 +1,4 @@
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, writeFile, readFile } from "node:fs/promises";
 import path from "node:path";
 import { renderHtmlReport } from "../analyst/html-report.js";
 import { loadProjectConfig } from "../config/load-config.js";
@@ -13,8 +13,16 @@ import { ensureWorkspaceDirs, writeJson } from "../shared/fs-utils.js";
 
 type Command = "analyze" | "generate" | "run" | "pipeline";
 
+function parseArgs(args: string[]): { command: Command; target: string } {
+  const command = parseCommand(args[0] ?? "pipeline");
+  // --target <path>
+  const targetIndex = args.indexOf("--target");
+  const target = targetIndex !== -1 ? args[targetIndex + 1] ?? "../demo-app" : "../demo-app";
+  return { command, target };
+}
+
 export async function runCli(args: string[]): Promise<void> {
-  const command = parseCommand(args[0]);
+  const { command, target: appRoot } = parseArgs(args);
   const projectRoot = process.cwd();
   const config = await loadProjectConfig(path.join(projectRoot, "project.config.yaml"));
 
@@ -28,26 +36,26 @@ export async function runCli(args: string[]): Promise<void> {
 
   switch (command) {
     case "analyze": {
-      const bundle = await analyze(projectRoot, repoAnalyzer, dbAnalyzer);
+      const bundle = await analyze(appRoot, repoAnalyzer, dbAnalyzer);
       await persistAnalysis(projectRoot, bundle.repoModel, bundle.dbModel);
       break;
     }
     case "generate": {
-      const bundle = await analyze(projectRoot, repoAnalyzer, dbAnalyzer);
+      const bundle = await analyze(appRoot, repoAnalyzer, dbAnalyzer);
       await persistAnalysis(projectRoot, bundle.repoModel, bundle.dbModel);
       const scenarios = await scenarioGenerator.generate({
         config,
         repoModel: bundle.repoModel,
         dbModel: bundle.dbModel
       });
-      await writeJson(
-        path.join(projectRoot, "scenarios", "generated", "scenarios.json"),
-        scenarios
-      );
+      const generatedPath = path.join(projectRoot, "scenarios", "generated", "scenarios.json");
+      const poolPath = path.join(projectRoot, "scenarios_pool", "scenarios.json");
+      await writeJson(generatedPath, scenarios);
+      await writeJson(poolPath, scenarios);
       break;
     }
     case "run": {
-      const bundle = await analyze(projectRoot, repoAnalyzer, dbAnalyzer);
+      const bundle = await analyze(appRoot, repoAnalyzer, dbAnalyzer);
       const scenarios = await scenarioGenerator.generate({
         config,
         repoModel: bundle.repoModel,
@@ -68,17 +76,28 @@ export async function runCli(args: string[]): Promise<void> {
       break;
     }
     case "pipeline": {
-      const bundle = await analyze(projectRoot, repoAnalyzer, dbAnalyzer);
+      const bundle = await analyze(appRoot, repoAnalyzer, dbAnalyzer);
       await persistAnalysis(projectRoot, bundle.repoModel, bundle.dbModel);
-      const scenarios = await scenarioGenerator.generate({
-        config,
-        repoModel: bundle.repoModel,
-        dbModel: bundle.dbModel
-      });
-      await writeJson(
-        path.join(projectRoot, "scenarios", "generated", "scenarios.json"),
-        scenarios
-      );
+
+      // Read scenarios from pool instead of regenerating
+      const poolPath = path.join(projectRoot, "scenarios_pool", "scenarios.json");
+      let scenarios;
+      try {
+        const poolContent = await readFile(poolPath, "utf8");
+        scenarios = JSON.parse(poolContent);
+        console.log(`Loaded ${scenarios.length} scenarios from pool`);
+      } catch {
+        console.log("No scenarios in pool, generating new ones...");
+        scenarios = await scenarioGenerator.generate({
+          config,
+          repoModel: bundle.repoModel,
+          dbModel: bundle.dbModel
+        });
+        const generatedPath = path.join(projectRoot, "scenarios", "generated", "scenarios.json");
+        await writeJson(generatedPath, scenarios);
+        await writeJson(poolPath, scenarios);
+      }
+
       const runResult = await runner.run({
         projectRoot,
         config,
@@ -109,13 +128,13 @@ function parseCommand(input?: string): Command {
 }
 
 async function analyze(
-  projectRoot: string,
+  appRoot: string,
   repoAnalyzer: RepoAnalyzer,
   dbAnalyzer: DbAnalyzer
 ): Promise<{ repoModel: RepoModel; dbModel: DbModel }> {
   const [repoModel, dbModel] = await Promise.all([
-    repoAnalyzer.analyze(projectRoot),
-    dbAnalyzer.analyze(projectRoot)
+    repoAnalyzer.analyze(appRoot),
+    dbAnalyzer.analyze(appRoot)
   ]);
 
   return { repoModel, dbModel };

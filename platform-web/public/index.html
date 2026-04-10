@@ -16,6 +16,12 @@
             这是一个本地演示控制台，可以触发测试、查看状态、打开被测网站和查看最新报告。
           </p>
         </div>
+
+        <div class="url-input-section">
+          <input type="url" id="target-url" value="http://localhost:3000" placeholder="输入目标网站 URL..." />
+          <button id="spider-button" type="button">AI 深度分析并生成场景</button>
+        </div>
+
         <div class="actions">
           <a class="ghost" href="http://127.0.0.1:3000/login" target="_blank" rel="noreferrer">
             打开演示网站
@@ -44,6 +50,16 @@
           <span class="label">场景数</span>
           <strong id="scenario-count">0</strong>
         </article>
+      </section>
+
+      <section class="scenario-list-section">
+        <div class="panel-header">
+          <h2>生成的测试场景</h2>
+          <span id="scenario-list-count" class="count-badge">0 个</span>
+        </div>
+        <div id="scenario-list" class="scenario-list">
+          <p class="empty-message">点击"AI 深度分析并生成场景"按钮开始生成测试场景...</p>
+        </div>
       </section>
 
       <section class="grid">

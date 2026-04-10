@@ -17,8 +17,8 @@ selectors:
   login.password: input[name="password"]
   login.submit: '[data-testid="submit"]'
 db:
-  client: postgres
-  connectionString: postgresql://user:password@localhost:5432/app
+  client: sqlite
+  connectionString: sqlite://../demo-app/test.db
 llm:
-  provider: mock
-  model: scenario-draft
+  provider: openai
+  model: gpt-4.1-mini

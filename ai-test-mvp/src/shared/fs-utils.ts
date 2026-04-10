@@ -7,6 +7,7 @@ export async function ensureWorkspaceDirs(projectRoot: string): Promise<void> {
     "screenshots",
     "traces",
     path.join("scenarios", "generated"),
+    path.join("scenarios_pool"),
     path.join("src", "generated-tests")
   ];
 

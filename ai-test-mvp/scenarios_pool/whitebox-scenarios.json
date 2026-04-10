@@ -1,0 +1,1056 @@
+[
+  {
+    "id": "whitebox-001-user-duplicate-username",
+    "module": "user-management",
+    "priority": "high",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "users"
+      },
+      {
+        "action": "db.insert",
+        "table": "users",
+        "data": {
+          "id": 1,
+          "username": "testuser",
+          "password": "password123",
+          "email": "test@example.com",
+          "role": "viewer"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/users",
+        "method": "POST",
+        "body": {
+          "username": "testuser",
+          "password": "newpass",
+          "email": "another@example.com",
+          "role": "admin"
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/users",
+        "expect": {
+          "status": "409"
+        }
+      },
+      {
+        "type": "db",
+        "table": "users",
+        "where": {
+          "username": "testuser"
+        },
+        "expect": {
+          "email": "test@example.com",
+          "role": "viewer"
+        }
+      }
+    ],
+    "risk": "high"
+  },
+  {
+    "id": "whitebox-002-order-insufficient-stock",
+    "module": "order-management",
+    "priority": "critical",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "orders"
+      },
+      {
+        "action": "db.insert",
+        "table": "users",
+        "data": {
+          "id": 100,
+          "username": "buyer",
+          "password": "pass",
+          "role": "viewer"
+        }
+      },
+      {
+        "action": "db.update",
+        "table": "products",
+        "data": {
+          "stock": 5
+        },
+        "where": {
+          "id": "1"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/orders",
+        "method": "POST",
+        "body": {
+          "user_id": 100,
+          "product_id": 1,
+          "quantity": 10
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/orders",
+        "expect": {
+          "status": "400"
+        }
+      },
+      {
+        "type": "db",
+        "table": "products",
+        "where": {
+          "id": "1"
+        },
+        "expect": {
+          "stock": "5"
+        }
+      },
+      {
+        "type": "db",
+        "table": "orders",
+        "where": {
+          "user_id": "100"
+        },
+        "expect": {}
+      }
+    ],
+    "risk": "critical"
+  },
+  {
+    "id": "whitebox-003-order-transaction-rollback",
+    "module": "order-management",
+    "priority": "critical",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "orders"
+      },
+      {
+        "action": "db.insert",
+        "table": "users",
+        "data": {
+          "id": 101,
+          "username": "buyer2",
+          "password": "pass",
+          "role": "viewer"
+        }
+      },
+      {
+        "action": "db.update",
+        "table": "products",
+        "data": {
+          "stock": 10
+        },
+        "where": {
+          "id": "1"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/orders",
+        "method": "POST",
+        "body": {
+          "user_id": 999999,
+          "product_id": 1,
+          "quantity": 2
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/orders",
+        "expect": {
+          "status": "500"
+        }
+      },
+      {
+        "type": "db",
+        "table": "products",
+        "where": {
+          "id": "1"
+        },
+        "expect": {
+          "stock": "10"
+        }
+      }
+    ],
+    "risk": "critical"
+  },
+  {
+    "id": "whitebox-004-order-cancel-stock-restore",
+    "module": "order-management",
+    "priority": "high",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "orders"
+      },
+      {
+        "action": "db.insert",
+        "table": "users",
+        "data": {
+          "id": 102,
+          "username": "buyer3",
+          "password": "pass",
+          "role": "viewer"
+        }
+      },
+      {
+        "action": "db.update",
+        "table": "products",
+        "data": {
+          "stock": 20
+        },
+        "where": {
+          "id": "2"
+        }
+      },
+      {
+        "action": "db.insert",
+        "table": "orders",
+        "data": {
+          "id": 500,
+          "user_id": 102,
+          "product_id": 2,
+          "quantity": 5,
+          "total_price": 149.95,
+          "status": "pending"
+        }
+      },
+      {
+        "action": "db.update",
+        "table": "products",
+        "data": {
+          "stock": 15
+        },
+        "where": {
+          "id": "2"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/orders/500/cancel",
+        "method": "POST"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/orders/500/cancel",
+        "expect": {
+          "status": "200"
+        }
+      },
+      {
+        "type": "db",
+        "table": "products",
+        "where": {
+          "id": "2"
+        },
+        "expect": {
+          "stock": "20"
+        }
+      },
+      {
+        "type": "db",
+        "table": "orders",
+        "where": {
+          "id": "500"
+        },
+        "expect": {
+          "status": "cancelled"
+        }
+      }
+    ],
+    "risk": "high"
+  },
+  {
+    "id": "whitebox-005-order-double-cancel",
+    "module": "order-management",
+    "priority": "medium",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "orders"
+      },
+      {
+        "action": "db.insert",
+        "table": "users",
+        "data": {
+          "id": 103,
+          "username": "buyer4",
+          "password": "pass",
+          "role": "viewer"
+        }
+      },
+      {
+        "action": "db.update",
+        "table": "products",
+        "data": {
+          "stock": 30
+        },
+        "where": {
+          "id": "3"
+        }
+      },
+      {
+        "action": "db.insert",
+        "table": "orders",
+        "data": {
+          "id": 501,
+          "user_id": 103,
+          "product_id": 3,
+          "quantity": 3,
+          "total_price": 239.97,
+          "status": "cancelled"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/orders/501/cancel",
+        "method": "POST"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/orders/501/cancel",
+        "expect": {
+          "status": "400"
+        }
+      },
+      {
+        "type": "db",
+        "table": "products",
+        "where": {
+          "id": "3"
+        },
+        "expect": {
+          "stock": "30"
+        }
+      }
+    ],
+    "risk": "medium"
+  },
+  {
+    "id": "whitebox-006-concurrent-order-race-condition",
+    "module": "order-management",
+    "priority": "critical",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "orders"
+      },
+      {
+        "action": "db.insert",
+        "table": "users",
+        "data": {
+          "id": 104,
+          "username": "buyer5",
+          "password": "pass",
+          "role": "viewer"
+        }
+      },
+      {
+        "action": "db.insert",
+        "table": "users",
+        "data": {
+          "id": 105,
+          "username": "buyer6",
+          "password": "pass",
+          "role": "viewer"
+        }
+      },
+      {
+        "action": "db.update",
+        "table": "products",
+        "data": {
+          "stock": 1
+        },
+        "where": {
+          "id": "1"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/orders",
+        "method": "POST",
+        "body": {
+          "user_id": 104,
+          "product_id": 1,
+          "quantity": 1
+        }
+      },
+      {
+        "action": "api.request",
+        "target": "/api/orders",
+        "method": "POST",
+        "body": {
+          "user_id": 105,
+          "product_id": 1,
+          "quantity": 1
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "type": "db",
+        "table": "products",
+        "where": {
+          "id": "1"
+        },
+        "expect": {
+          "stock": "0"
+        }
+      }
+    ],
+    "risk": "critical"
+  },
+  {
+    "id": "whitebox-007-login-sql-injection",
+    "module": "authentication",
+    "priority": "critical",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "users"
+      },
+      {
+        "action": "db.insert",
+        "table": "users",
+        "data": {
+          "id": 1,
+          "username": "admin",
+          "password": "secret123",
+          "role": "admin"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/login",
+        "method": "POST",
+        "body": {
+          "username": "admin' OR '1'='1",
+          "password": "anything"
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/login",
+        "expect": {
+          "status": "401"
+        }
+      }
+    ],
+    "risk": "critical"
+  },
+  {
+    "id": "whitebox-008-user-create-missing-fields",
+    "module": "user-management",
+    "priority": "high",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "users"
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/users",
+        "method": "POST",
+        "body": {
+          "username": "newuser"
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/users",
+        "expect": {
+          "status": "400"
+        }
+      }
+    ],
+    "risk": "high"
+  },
+  {
+    "id": "whitebox-009-order-price-calculation",
+    "module": "order-management",
+    "priority": "critical",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "orders"
+      },
+      {
+        "action": "db.insert",
+        "table": "users",
+        "data": {
+          "id": 106,
+          "username": "buyer7",
+          "password": "pass",
+          "role": "viewer"
+        }
+      },
+      {
+        "action": "db.update",
+        "table": "products",
+        "data": {
+          "stock": 100,
+          "price": 99.99
+        },
+        "where": {
+          "id": "1"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/orders",
+        "method": "POST",
+        "body": {
+          "user_id": 106,
+          "product_id": 1,
+          "quantity": 3
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/orders",
+        "expect": {
+          "status": "201"
+        }
+      },
+      {
+        "type": "db",
+        "table": "orders",
+        "where": {
+          "user_id": "106"
+        },
+        "expect": {
+          "total_price": "299.97",
+          "quantity": "3"
+        }
+      }
+    ],
+    "risk": "critical"
+  },
+  {
+    "id": "whitebox-010-order-nonexistent-product",
+    "module": "order-management",
+    "priority": "high",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "orders"
+      },
+      {
+        "action": "db.insert",
+        "table": "users",
+        "data": {
+          "id": 107,
+          "username": "buyer8",
+          "password": "pass",
+          "role": "viewer"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/orders",
+        "method": "POST",
+        "body": {
+          "user_id": 107,
+          "product_id": 99999,
+          "quantity": 1
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/orders",
+        "expect": {
+          "status": "404"
+        }
+      }
+    ],
+    "risk": "high"
+  },
+  {
+    "id": "whitebox-011-order-negative-quantity",
+    "module": "order-management",
+    "priority": "high",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "orders"
+      },
+      {
+        "action": "db.insert",
+        "table": "users",
+        "data": {
+          "id": 108,
+          "username": "buyer9",
+          "password": "pass",
+          "role": "viewer"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/orders",
+        "method": "POST",
+        "body": {
+          "user_id": 108,
+          "product_id": 1,
+          "quantity": -5
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/orders",
+        "expect": {
+          "status": "400"
+        }
+      }
+    ],
+    "risk": "high"
+  },
+  {
+    "id": "whitebox-012-user-default-role",
+    "module": "user-management",
+    "priority": "medium",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "users"
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/users",
+        "method": "POST",
+        "body": {
+          "username": "norole",
+          "password": "pass123"
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/users",
+        "expect": {
+          "status": "201"
+        }
+      },
+      {
+        "type": "db",
+        "table": "users",
+        "where": {
+          "username": "norole"
+        },
+        "expect": {
+          "role": "viewer"
+        }
+      }
+    ],
+    "risk": "medium"
+  },
+  {
+    "id": "whitebox-013-order-zero-quantity",
+    "module": "order-management",
+    "priority": "medium",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "orders"
+      },
+      {
+        "action": "db.insert",
+        "table": "users",
+        "data": {
+          "id": 109,
+          "username": "buyer10",
+          "password": "pass",
+          "role": "viewer"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/orders",
+        "method": "POST",
+        "body": {
+          "user_id": 109,
+          "product_id": 1,
+          "quantity": 0
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/orders",
+        "expect": {
+          "status": "400"
+        }
+      }
+    ],
+    "risk": "medium"
+  },
+  {
+    "id": "whitebox-014-login-empty-credentials",
+    "module": "authentication",
+    "priority": "high",
+    "preconditions": [],
+    "setup": [],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/login",
+        "method": "POST",
+        "body": {
+          "username": "",
+          "password": ""
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/login",
+        "expect": {
+          "status": "400"
+        }
+      }
+    ],
+    "risk": "high"
+  },
+  {
+    "id": "whitebox-015-order-cancel-nonexistent",
+    "module": "order-management",
+    "priority": "medium",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "orders"
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/orders/99999/cancel",
+        "method": "POST"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/orders/99999/cancel",
+        "expect": {
+          "status": "404"
+        }
+      }
+    ],
+    "risk": "medium"
+  },
+  {
+    "id": "whitebox-016-user-create-xss-username",
+    "module": "user-management",
+    "priority": "high",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "users"
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/users",
+        "method": "POST",
+        "body": {
+          "username": "<script>alert('xss')</script>",
+          "password": "pass123",
+          "role": "viewer"
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/users",
+        "expect": {
+          "status": "201"
+        }
+      },
+      {
+        "type": "db",
+        "table": "users",
+        "where": {
+          "username": "<script>alert('xss')</script>"
+        },
+        "expect": {
+          "role": "viewer"
+        }
+      }
+    ],
+    "risk": "high"
+  },
+  {
+    "id": "whitebox-017-order-large-quantity",
+    "module": "order-management",
+    "priority": "medium",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "orders"
+      },
+      {
+        "action": "db.insert",
+        "table": "users",
+        "data": {
+          "id": 110,
+          "username": "buyer11",
+          "password": "pass",
+          "role": "viewer"
+        }
+      },
+      {
+        "action": "db.update",
+        "table": "products",
+        "data": {
+          "stock": 1000000
+        },
+        "where": {
+          "id": "1"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/orders",
+        "method": "POST",
+        "body": {
+          "user_id": 110,
+          "product_id": 1,
+          "quantity": 999999
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/orders",
+        "expect": {
+          "status": "201"
+        }
+      },
+      {
+        "type": "db",
+        "table": "products",
+        "where": {
+          "id": "1"
+        },
+        "expect": {
+          "stock": "1"
+        }
+      }
+    ],
+    "risk": "medium"
+  },
+  {
+    "id": "whitebox-018-login-case-sensitive",
+    "module": "authentication",
+    "priority": "medium",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "users"
+      },
+      {
+        "action": "db.insert",
+        "table": "users",
+        "data": {
+          "id": 1,
+          "username": "Admin",
+          "password": "password",
+          "role": "admin"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/login",
+        "method": "POST",
+        "body": {
+          "username": "admin",
+          "password": "password"
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/login",
+        "expect": {
+          "status": "401"
+        }
+      }
+    ],
+    "risk": "medium"
+  },
+  {
+    "id": "whitebox-019-user-create-long-username",
+    "module": "user-management",
+    "priority": "low",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "users"
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/users",
+        "method": "POST",
+        "body": {
+          "username": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "password": "pass123",
+          "role": "viewer"
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/users",
+        "expect": {
+          "status": "500"
+        }
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "whitebox-020-order-stock-boundary",
+    "module": "order-management",
+    "priority": "high",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "orders"
+      },
+      {
+        "action": "db.insert",
+        "table": "users",
+        "data": {
+          "id": 111,
+          "username": "buyer12",
+          "password": "pass",
+          "role": "viewer"
+        }
+      },
+      {
+        "action": "db.update",
+        "table": "products",
+        "data": {
+          "stock": 10
+        },
+        "where": {
+          "id": "2"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/orders",
+        "method": "POST",
+        "body": {
+          "user_id": 111,
+          "product_id": 2,
+          "quantity": 10
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/orders",
+        "expect": {
+          "status": "201"
+        }
+      },
+      {
+        "type": "db",
+        "table": "products",
+        "where": {
+          "id": "2"
+        },
+        "expect": {
+          "stock": "0"
+        }
+      }
+    ],
+    "risk": "high"
+  }
+]

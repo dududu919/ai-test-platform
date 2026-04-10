@@ -1,0 +1,4356 @@
+[
+  {
+    "id": "empty-submit-1",
+    "module": "form-validation",
+    "priority": "high",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "必填"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "sql-injection-username-1-2",
+    "module": "security-sql",
+    "priority": "critical",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "' OR '1'='1"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "错误"
+      }
+    ],
+    "risk": "critical"
+  },
+  {
+    "id": "sql-injection-username-2-3",
+    "module": "security-sql",
+    "priority": "critical",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "admin'--"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "错误"
+      }
+    ],
+    "risk": "critical"
+  },
+  {
+    "id": "sql-injection-username-3-4",
+    "module": "security-sql",
+    "priority": "critical",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "' OR 1=1--"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "错误"
+      }
+    ],
+    "risk": "critical"
+  },
+  {
+    "id": "sql-injection-username-4-5",
+    "module": "security-sql",
+    "priority": "critical",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "admin' OR '1'='1'--"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "错误"
+      }
+    ],
+    "risk": "critical"
+  },
+  {
+    "id": "sql-injection-username-5-6",
+    "module": "security-sql",
+    "priority": "critical",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "' UNION SELECT NULL--"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "错误"
+      }
+    ],
+    "risk": "critical"
+  },
+  {
+    "id": "sql-injection-username-6-7",
+    "module": "security-sql",
+    "priority": "critical",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "1' AND '1'='1"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "错误"
+      }
+    ],
+    "risk": "critical"
+  },
+  {
+    "id": "sql-injection-username-7-8",
+    "module": "security-sql",
+    "priority": "critical",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "' OR 'a'='a"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "错误"
+      }
+    ],
+    "risk": "critical"
+  },
+  {
+    "id": "sql-injection-username-8-9",
+    "module": "security-sql",
+    "priority": "critical",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "admin' #"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "错误"
+      }
+    ],
+    "risk": "critical"
+  },
+  {
+    "id": "sql-injection-username-9-10",
+    "module": "security-sql",
+    "priority": "critical",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "' OR ''='"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "错误"
+      }
+    ],
+    "risk": "critical"
+  },
+  {
+    "id": "sql-injection-username-10-11",
+    "module": "security-sql",
+    "priority": "critical",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "1' OR '1'='1' /*"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "错误"
+      }
+    ],
+    "risk": "critical"
+  },
+  {
+    "id": "sql-injection-password-1-12",
+    "module": "security-sql",
+    "priority": "critical",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "admin"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "' OR '1'='1"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "错误"
+      }
+    ],
+    "risk": "critical"
+  },
+  {
+    "id": "sql-injection-password-2-13",
+    "module": "security-sql",
+    "priority": "critical",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "admin"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "admin'--"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "错误"
+      }
+    ],
+    "risk": "critical"
+  },
+  {
+    "id": "sql-injection-password-3-14",
+    "module": "security-sql",
+    "priority": "critical",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "admin"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "' OR 1=1--"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "错误"
+      }
+    ],
+    "risk": "critical"
+  },
+  {
+    "id": "sql-injection-password-4-15",
+    "module": "security-sql",
+    "priority": "critical",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "admin"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "admin' OR '1'='1'--"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "错误"
+      }
+    ],
+    "risk": "critical"
+  },
+  {
+    "id": "sql-injection-password-5-16",
+    "module": "security-sql",
+    "priority": "critical",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "admin"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "' UNION SELECT NULL--"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "错误"
+      }
+    ],
+    "risk": "critical"
+  },
+  {
+    "id": "sql-injection-password-6-17",
+    "module": "security-sql",
+    "priority": "critical",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "admin"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "1' AND '1'='1"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "错误"
+      }
+    ],
+    "risk": "critical"
+  },
+  {
+    "id": "sql-injection-password-7-18",
+    "module": "security-sql",
+    "priority": "critical",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "admin"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "' OR 'a'='a"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "错误"
+      }
+    ],
+    "risk": "critical"
+  },
+  {
+    "id": "sql-injection-password-8-19",
+    "module": "security-sql",
+    "priority": "critical",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "admin"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "admin' #"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "错误"
+      }
+    ],
+    "risk": "critical"
+  },
+  {
+    "id": "sql-injection-password-9-20",
+    "module": "security-sql",
+    "priority": "critical",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "admin"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "' OR ''='"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "错误"
+      }
+    ],
+    "risk": "critical"
+  },
+  {
+    "id": "sql-injection-password-10-21",
+    "module": "security-sql",
+    "priority": "critical",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "admin"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "1' OR '1'='1' /*"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "错误"
+      }
+    ],
+    "risk": "critical"
+  },
+  {
+    "id": "xss-username-1-22",
+    "module": "security-xss",
+    "priority": "high",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "<script>alert('xss')</script>"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "high"
+  },
+  {
+    "id": "xss-username-2-23",
+    "module": "security-xss",
+    "priority": "high",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "<img src=x onerror=alert('xss')>"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "high"
+  },
+  {
+    "id": "xss-username-3-24",
+    "module": "security-xss",
+    "priority": "high",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "<svg onload=alert('xss')>"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "high"
+  },
+  {
+    "id": "xss-username-4-25",
+    "module": "security-xss",
+    "priority": "high",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "javascript:alert('xss')"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "high"
+  },
+  {
+    "id": "xss-username-5-26",
+    "module": "security-xss",
+    "priority": "high",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "<iframe src='javascript:alert(1)'>"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "high"
+  },
+  {
+    "id": "xss-username-6-27",
+    "module": "security-xss",
+    "priority": "high",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "<body onload=alert('xss')>"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "high"
+  },
+  {
+    "id": "xss-username-7-28",
+    "module": "security-xss",
+    "priority": "high",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "<input onfocus=alert('xss') autofocus>"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "high"
+  },
+  {
+    "id": "xss-username-8-29",
+    "module": "security-xss",
+    "priority": "high",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "<select onfocus=alert('xss') autofocus>"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "high"
+  },
+  {
+    "id": "xss-username-9-30",
+    "module": "security-xss",
+    "priority": "high",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "<textarea onfocus=alert('xss') autofocus>"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "high"
+  },
+  {
+    "id": "xss-username-10-31",
+    "module": "security-xss",
+    "priority": "high",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "<marquee onstart=alert('xss')>"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "high"
+  },
+  {
+    "id": "boundary-username-length-1-32",
+    "module": "boundary-length",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "a"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "boundary-username-length-2-33",
+    "module": "boundary-length",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "aa"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "boundary-username-length-3-34",
+    "module": "boundary-length",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "aaa"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "boundary-username-length-50-35",
+    "module": "boundary-length",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "boundary-username-length-100-36",
+    "module": "boundary-length",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "boundary-username-length-255-37",
+    "module": "boundary-length",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "boundary-username-length-256-38",
+    "module": "boundary-length",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "boundary-username-length-500-39",
+    "module": "boundary-length",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "boundary-username-length-1000-40",
+    "module": "boundary-length",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "boundary-username-length-10000-41",
+    "module": "boundary-length",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "special-chars-username-1-42",
+    "module": "boundary-chars",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "!@#$%^&*()"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "special-chars-username-2-43",
+    "module": "boundary-chars",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "user@domain.com"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "special-chars-username-3-44",
+    "module": "boundary-chars",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "user name"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "special-chars-username-4-45",
+    "module": "boundary-chars",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "user\nname"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "special-chars-username-5-46",
+    "module": "boundary-chars",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "user\tname"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "special-chars-username-6-47",
+    "module": "boundary-chars",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "用户名"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "special-chars-username-7-48",
+    "module": "boundary-chars",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "пользователь"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "special-chars-username-8-49",
+    "module": "boundary-chars",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "ユーザー"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "special-chars-username-9-50",
+    "module": "boundary-chars",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "user'name"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "special-chars-username-10-51",
+    "module": "boundary-chars",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "user\"name"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "valid-login-1-52",
+    "module": "happy-path",
+    "priority": "high",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "admin"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "当前角色"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "valid-login-2-53",
+    "module": "happy-path",
+    "priority": "high",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "viewer"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "当前角色"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "valid-login-3-54",
+    "module": "happy-path",
+    "priority": "high",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "admin"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "admin123"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "当前角色"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "valid-login-4-55",
+    "module": "happy-path",
+    "priority": "high",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "test"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "test123"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "当前角色"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "valid-login-5-56",
+    "module": "happy-path",
+    "priority": "high",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "user1"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "pass1"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "当前角色"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "case-sensitivity-1-57",
+    "module": "auth-logic",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "ADMIN"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "case-sensitivity-2-58",
+    "module": "auth-logic",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "Admin"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "case-sensitivity-3-59",
+    "module": "auth-logic",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "aDmIn"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "case-sensitivity-4-60",
+    "module": "auth-logic",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "admin"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "PASSWORD"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "case-sensitivity-5-61",
+    "module": "auth-logic",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "admin"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "Password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "whitespace-1-62",
+    "module": "boundary-whitespace",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": " admin"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "whitespace-2-63",
+    "module": "boundary-whitespace",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "admin "
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "whitespace-3-64",
+    "module": "boundary-whitespace",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": " admin "
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "whitespace-4-65",
+    "module": "boundary-whitespace",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "admin"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": " password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "whitespace-5-66",
+    "module": "boundary-whitespace",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "admin"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password "
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "rapid-submit-1-67",
+    "module": "stress",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "admin"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "medium"
+  },
+  {
+    "id": "rapid-submit-2-68",
+    "module": "stress",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "admin"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "medium"
+  },
+  {
+    "id": "rapid-submit-3-69",
+    "module": "stress",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "admin"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "medium"
+  },
+  {
+    "id": "password-complexity-empty-70",
+    "module": "auth-security",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "admin"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": ""
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "password-complexity-single-char-71",
+    "module": "auth-security",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "admin"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "1"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "password-complexity-numeric-only-72",
+    "module": "auth-security",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "admin"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "12345678"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "password-complexity-lowercase-only-73",
+    "module": "auth-security",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "admin"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "abcdefgh"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "password-complexity-uppercase-only-74",
+    "module": "auth-security",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "admin"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "ABCDEFGH"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "password-complexity-mixed-short-75",
+    "module": "auth-security",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "admin"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "Pass123"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "password-complexity-complex-76",
+    "module": "auth-security",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "admin"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "P@ssw0rd!"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "password-complexity-repeated-pattern-77",
+    "module": "auth-security",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "admin"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "passwordpasswordpasswordpasswordpasswordpasswordpasswordpasswordpasswordpassword"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "password-complexity-keyboard-pattern-78",
+    "module": "auth-security",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "admin"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "qwertyuiop"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "password-complexity-common-weak-79",
+    "module": "auth-security",
+    "priority": "medium",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "admin"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "admin123"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "unicode-username-1-80",
+    "module": "boundary-unicode",
+    "priority": "low",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "用户名123"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "unicode-username-2-81",
+    "module": "boundary-unicode",
+    "priority": "low",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "ユーザー"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "unicode-username-3-82",
+    "module": "boundary-unicode",
+    "priority": "low",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "пользователь"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "unicode-username-4-83",
+    "module": "boundary-unicode",
+    "priority": "low",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "مستخدم"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "unicode-username-5-84",
+    "module": "boundary-unicode",
+    "priority": "low",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "👤admin"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "unicode-username-6-85",
+    "module": "boundary-unicode",
+    "priority": "low",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "test🔒"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "unicode-username-7-86",
+    "module": "boundary-unicode",
+    "priority": "low",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "user\u0000name"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "unicode-username-8-87",
+    "module": "boundary-unicode",
+    "priority": "low",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "user​name"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "unicode-username-9-88",
+    "module": "boundary-unicode",
+    "priority": "low",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "test﻿user"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "unicode-username-10-89",
+    "module": "boundary-unicode",
+    "priority": "low",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "admin‮"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "timing-attack-1-90",
+    "module": "security-timing",
+    "priority": "low",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "user0"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": ""
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "timing-attack-2-91",
+    "module": "security-timing",
+    "priority": "low",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "user1"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "timing-attack-3-92",
+    "module": "security-timing",
+    "priority": "low",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "user2"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "timing-attack-4-93",
+    "module": "security-timing",
+    "priority": "low",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "user3"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "timing-attack-5-94",
+    "module": "security-timing",
+    "priority": "low",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "user4"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "null-byte-1-95",
+    "module": "security-injection",
+    "priority": "high",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "admin\u0000"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "high"
+  },
+  {
+    "id": "null-byte-2-96",
+    "module": "security-injection",
+    "priority": "high",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "\u0000admin"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "high"
+  },
+  {
+    "id": "null-byte-3-97",
+    "module": "security-injection",
+    "priority": "high",
+    "preconditions": [],
+    "steps": [
+      {
+        "action": "goto",
+        "target": "/",
+        "value": "http://localhost:3000"
+      },
+      {
+        "action": "fill",
+        "target": "login.username",
+        "value": "ad\u0000min"
+      },
+      {
+        "action": "fill",
+        "target": "login.password",
+        "value": "password"
+      },
+      {
+        "action": "click",
+        "target": "submit"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "ui",
+        "value": "登录"
+      }
+    ],
+    "risk": "high"
+  },
+  {
+    "id": "whitebox-001-user-duplicate-username",
+    "module": "user-management",
+    "priority": "high",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "users"
+      },
+      {
+        "action": "db.insert",
+        "table": "users",
+        "data": {
+          "id": 1,
+          "username": "testuser",
+          "password": "password123",
+          "email": "test@example.com",
+          "role": "viewer"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/users",
+        "method": "POST",
+        "body": {
+          "username": "testuser",
+          "password": "newpass",
+          "email": "another@example.com",
+          "role": "admin"
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/users",
+        "expect": {
+          "status": "409"
+        }
+      },
+      {
+        "type": "db",
+        "table": "users",
+        "where": {
+          "username": "testuser"
+        },
+        "expect": {
+          "email": "test@example.com",
+          "role": "viewer"
+        }
+      }
+    ],
+    "risk": "high"
+  },
+  {
+    "id": "whitebox-002-order-insufficient-stock",
+    "module": "order-management",
+    "priority": "critical",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "orders"
+      },
+      {
+        "action": "db.insert",
+        "table": "users",
+        "data": {
+          "id": 100,
+          "username": "buyer",
+          "password": "pass",
+          "role": "viewer"
+        }
+      },
+      {
+        "action": "db.update",
+        "table": "products",
+        "data": {
+          "stock": 5
+        },
+        "where": {
+          "id": "1"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/orders",
+        "method": "POST",
+        "body": {
+          "user_id": 100,
+          "product_id": 1,
+          "quantity": 10
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/orders",
+        "expect": {
+          "status": "400"
+        }
+      },
+      {
+        "type": "db",
+        "table": "products",
+        "where": {
+          "id": "1"
+        },
+        "expect": {
+          "stock": "5"
+        }
+      },
+      {
+        "type": "db",
+        "table": "orders",
+        "where": {
+          "user_id": "100"
+        },
+        "expect": {}
+      }
+    ],
+    "risk": "critical"
+  },
+  {
+    "id": "whitebox-003-order-transaction-rollback",
+    "module": "order-management",
+    "priority": "critical",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "orders"
+      },
+      {
+        "action": "db.insert",
+        "table": "users",
+        "data": {
+          "id": 101,
+          "username": "buyer2",
+          "password": "pass",
+          "role": "viewer"
+        }
+      },
+      {
+        "action": "db.update",
+        "table": "products",
+        "data": {
+          "stock": 10
+        },
+        "where": {
+          "id": "1"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/orders",
+        "method": "POST",
+        "body": {
+          "user_id": 999999,
+          "product_id": 1,
+          "quantity": 2
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/orders",
+        "expect": {
+          "status": "500"
+        }
+      },
+      {
+        "type": "db",
+        "table": "products",
+        "where": {
+          "id": "1"
+        },
+        "expect": {
+          "stock": "10"
+        }
+      }
+    ],
+    "risk": "critical"
+  },
+  {
+    "id": "whitebox-004-order-cancel-stock-restore",
+    "module": "order-management",
+    "priority": "high",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "orders"
+      },
+      {
+        "action": "db.insert",
+        "table": "users",
+        "data": {
+          "id": 102,
+          "username": "buyer3",
+          "password": "pass",
+          "role": "viewer"
+        }
+      },
+      {
+        "action": "db.update",
+        "table": "products",
+        "data": {
+          "stock": 20
+        },
+        "where": {
+          "id": "2"
+        }
+      },
+      {
+        "action": "db.insert",
+        "table": "orders",
+        "data": {
+          "id": 500,
+          "user_id": 102,
+          "product_id": 2,
+          "quantity": 5,
+          "total_price": 149.95,
+          "status": "pending"
+        }
+      },
+      {
+        "action": "db.update",
+        "table": "products",
+        "data": {
+          "stock": 15
+        },
+        "where": {
+          "id": "2"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/orders/500/cancel",
+        "method": "POST"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/orders/500/cancel",
+        "expect": {
+          "status": "200"
+        }
+      },
+      {
+        "type": "db",
+        "table": "products",
+        "where": {
+          "id": "2"
+        },
+        "expect": {
+          "stock": "20"
+        }
+      },
+      {
+        "type": "db",
+        "table": "orders",
+        "where": {
+          "id": "500"
+        },
+        "expect": {
+          "status": "cancelled"
+        }
+      }
+    ],
+    "risk": "high"
+  },
+  {
+    "id": "whitebox-005-order-double-cancel",
+    "module": "order-management",
+    "priority": "medium",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "orders"
+      },
+      {
+        "action": "db.insert",
+        "table": "users",
+        "data": {
+          "id": 103,
+          "username": "buyer4",
+          "password": "pass",
+          "role": "viewer"
+        }
+      },
+      {
+        "action": "db.update",
+        "table": "products",
+        "data": {
+          "stock": 30
+        },
+        "where": {
+          "id": "3"
+        }
+      },
+      {
+        "action": "db.insert",
+        "table": "orders",
+        "data": {
+          "id": 501,
+          "user_id": 103,
+          "product_id": 3,
+          "quantity": 3,
+          "total_price": 239.97,
+          "status": "cancelled"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/orders/501/cancel",
+        "method": "POST"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/orders/501/cancel",
+        "expect": {
+          "status": "400"
+        }
+      },
+      {
+        "type": "db",
+        "table": "products",
+        "where": {
+          "id": "3"
+        },
+        "expect": {
+          "stock": "30"
+        }
+      }
+    ],
+    "risk": "medium"
+  },
+  {
+    "id": "whitebox-006-concurrent-order-race-condition",
+    "module": "order-management",
+    "priority": "critical",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "orders"
+      },
+      {
+        "action": "db.insert",
+        "table": "users",
+        "data": {
+          "id": 104,
+          "username": "buyer5",
+          "password": "pass",
+          "role": "viewer"
+        }
+      },
+      {
+        "action": "db.insert",
+        "table": "users",
+        "data": {
+          "id": 105,
+          "username": "buyer6",
+          "password": "pass",
+          "role": "viewer"
+        }
+      },
+      {
+        "action": "db.update",
+        "table": "products",
+        "data": {
+          "stock": 1
+        },
+        "where": {
+          "id": "1"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/orders",
+        "method": "POST",
+        "body": {
+          "user_id": 104,
+          "product_id": 1,
+          "quantity": 1
+        }
+      },
+      {
+        "action": "api.request",
+        "target": "/api/orders",
+        "method": "POST",
+        "body": {
+          "user_id": 105,
+          "product_id": 1,
+          "quantity": 1
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "type": "db",
+        "table": "products",
+        "where": {
+          "id": "1"
+        },
+        "expect": {
+          "stock": "0"
+        }
+      }
+    ],
+    "risk": "critical"
+  },
+  {
+    "id": "whitebox-007-login-sql-injection",
+    "module": "authentication",
+    "priority": "critical",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "users"
+      },
+      {
+        "action": "db.insert",
+        "table": "users",
+        "data": {
+          "id": 1,
+          "username": "admin",
+          "password": "secret123",
+          "role": "admin"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/login",
+        "method": "POST",
+        "body": {
+          "username": "admin' OR '1'='1",
+          "password": "anything"
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/login",
+        "expect": {
+          "status": "401"
+        }
+      }
+    ],
+    "risk": "critical"
+  },
+  {
+    "id": "whitebox-008-user-create-missing-fields",
+    "module": "user-management",
+    "priority": "high",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "users"
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/users",
+        "method": "POST",
+        "body": {
+          "username": "newuser"
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/users",
+        "expect": {
+          "status": "400"
+        }
+      }
+    ],
+    "risk": "high"
+  },
+  {
+    "id": "whitebox-009-order-price-calculation",
+    "module": "order-management",
+    "priority": "critical",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "orders"
+      },
+      {
+        "action": "db.insert",
+        "table": "users",
+        "data": {
+          "id": 106,
+          "username": "buyer7",
+          "password": "pass",
+          "role": "viewer"
+        }
+      },
+      {
+        "action": "db.update",
+        "table": "products",
+        "data": {
+          "stock": 100,
+          "price": 99.99
+        },
+        "where": {
+          "id": "1"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/orders",
+        "method": "POST",
+        "body": {
+          "user_id": 106,
+          "product_id": 1,
+          "quantity": 3
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/orders",
+        "expect": {
+          "status": "201"
+        }
+      },
+      {
+        "type": "db",
+        "table": "orders",
+        "where": {
+          "user_id": "106"
+        },
+        "expect": {
+          "total_price": "299.97",
+          "quantity": "3"
+        }
+      }
+    ],
+    "risk": "critical"
+  },
+  {
+    "id": "whitebox-010-order-nonexistent-product",
+    "module": "order-management",
+    "priority": "high",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "orders"
+      },
+      {
+        "action": "db.insert",
+        "table": "users",
+        "data": {
+          "id": 107,
+          "username": "buyer8",
+          "password": "pass",
+          "role": "viewer"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/orders",
+        "method": "POST",
+        "body": {
+          "user_id": 107,
+          "product_id": 99999,
+          "quantity": 1
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/orders",
+        "expect": {
+          "status": "404"
+        }
+      }
+    ],
+    "risk": "high"
+  },
+  {
+    "id": "whitebox-011-order-negative-quantity",
+    "module": "order-management",
+    "priority": "high",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "orders"
+      },
+      {
+        "action": "db.insert",
+        "table": "users",
+        "data": {
+          "id": 108,
+          "username": "buyer9",
+          "password": "pass",
+          "role": "viewer"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/orders",
+        "method": "POST",
+        "body": {
+          "user_id": 108,
+          "product_id": 1,
+          "quantity": -5
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/orders",
+        "expect": {
+          "status": "400"
+        }
+      }
+    ],
+    "risk": "high"
+  },
+  {
+    "id": "whitebox-012-user-default-role",
+    "module": "user-management",
+    "priority": "medium",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "users"
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/users",
+        "method": "POST",
+        "body": {
+          "username": "norole",
+          "password": "pass123"
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/users",
+        "expect": {
+          "status": "201"
+        }
+      },
+      {
+        "type": "db",
+        "table": "users",
+        "where": {
+          "username": "norole"
+        },
+        "expect": {
+          "role": "viewer"
+        }
+      }
+    ],
+    "risk": "medium"
+  },
+  {
+    "id": "whitebox-013-order-zero-quantity",
+    "module": "order-management",
+    "priority": "medium",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "orders"
+      },
+      {
+        "action": "db.insert",
+        "table": "users",
+        "data": {
+          "id": 109,
+          "username": "buyer10",
+          "password": "pass",
+          "role": "viewer"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/orders",
+        "method": "POST",
+        "body": {
+          "user_id": 109,
+          "product_id": 1,
+          "quantity": 0
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/orders",
+        "expect": {
+          "status": "400"
+        }
+      }
+    ],
+    "risk": "medium"
+  },
+  {
+    "id": "whitebox-014-login-empty-credentials",
+    "module": "authentication",
+    "priority": "high",
+    "preconditions": [],
+    "setup": [],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/login",
+        "method": "POST",
+        "body": {
+          "username": "",
+          "password": ""
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/login",
+        "expect": {
+          "status": "400"
+        }
+      }
+    ],
+    "risk": "high"
+  },
+  {
+    "id": "whitebox-015-order-cancel-nonexistent",
+    "module": "order-management",
+    "priority": "medium",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "orders"
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/orders/99999/cancel",
+        "method": "POST"
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/orders/99999/cancel",
+        "expect": {
+          "status": "404"
+        }
+      }
+    ],
+    "risk": "medium"
+  },
+  {
+    "id": "whitebox-016-user-create-xss-username",
+    "module": "user-management",
+    "priority": "high",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "users"
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/users",
+        "method": "POST",
+        "body": {
+          "username": "<script>alert('xss')</script>",
+          "password": "pass123",
+          "role": "viewer"
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/users",
+        "expect": {
+          "status": "201"
+        }
+      },
+      {
+        "type": "db",
+        "table": "users",
+        "where": {
+          "username": "<script>alert('xss')</script>"
+        },
+        "expect": {
+          "role": "viewer"
+        }
+      }
+    ],
+    "risk": "high"
+  },
+  {
+    "id": "whitebox-017-order-large-quantity",
+    "module": "order-management",
+    "priority": "medium",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "orders"
+      },
+      {
+        "action": "db.insert",
+        "table": "users",
+        "data": {
+          "id": 110,
+          "username": "buyer11",
+          "password": "pass",
+          "role": "viewer"
+        }
+      },
+      {
+        "action": "db.update",
+        "table": "products",
+        "data": {
+          "stock": 1000000
+        },
+        "where": {
+          "id": "1"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/orders",
+        "method": "POST",
+        "body": {
+          "user_id": 110,
+          "product_id": 1,
+          "quantity": 999999
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/orders",
+        "expect": {
+          "status": "201"
+        }
+      },
+      {
+        "type": "db",
+        "table": "products",
+        "where": {
+          "id": "1"
+        },
+        "expect": {
+          "stock": "1"
+        }
+      }
+    ],
+    "risk": "medium"
+  },
+  {
+    "id": "whitebox-018-login-case-sensitive",
+    "module": "authentication",
+    "priority": "medium",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "users"
+      },
+      {
+        "action": "db.insert",
+        "table": "users",
+        "data": {
+          "id": 1,
+          "username": "Admin",
+          "password": "password",
+          "role": "admin"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/login",
+        "method": "POST",
+        "body": {
+          "username": "admin",
+          "password": "password"
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/login",
+        "expect": {
+          "status": "401"
+        }
+      }
+    ],
+    "risk": "medium"
+  },
+  {
+    "id": "whitebox-019-user-create-long-username",
+    "module": "user-management",
+    "priority": "low",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "users"
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/users",
+        "method": "POST",
+        "body": {
+          "username": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "password": "pass123",
+          "role": "viewer"
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/users",
+        "expect": {
+          "status": "500"
+        }
+      }
+    ],
+    "risk": "low"
+  },
+  {
+    "id": "whitebox-020-order-stock-boundary",
+    "module": "order-management",
+    "priority": "high",
+    "preconditions": [],
+    "setup": [
+      {
+        "action": "db.truncate",
+        "table": "orders"
+      },
+      {
+        "action": "db.insert",
+        "table": "users",
+        "data": {
+          "id": 111,
+          "username": "buyer12",
+          "password": "pass",
+          "role": "viewer"
+        }
+      },
+      {
+        "action": "db.update",
+        "table": "products",
+        "data": {
+          "stock": 10
+        },
+        "where": {
+          "id": "2"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "action": "api.request",
+        "target": "/api/orders",
+        "method": "POST",
+        "body": {
+          "user_id": 111,
+          "product_id": 2,
+          "quantity": 10
+        }
+      }
+    ],
+    "assertions": [
+      {
+        "type": "api",
+        "target": "/api/orders",
+        "expect": {
+          "status": "201"
+        }
+      },
+      {
+        "type": "db",
+        "table": "products",
+        "where": {
+          "id": "2"
+        },
+        "expect": {
+          "stock": "0"
+        }
+      }
+    ],
+    "risk": "high"
+  }
+]

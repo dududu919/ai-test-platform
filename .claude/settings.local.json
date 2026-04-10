@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run:*)",
+      "Bash(node --input-type=module -e ':*)",
+      "Bash(node --import tsx -e ':*)",
+      "Bash(node server.js)",
+      "Bash(curl -s http://127.0.0.1:3000/login)",
+      "Bash(node:*)"
+    ]
+  }
+}
